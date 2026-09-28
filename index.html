@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Boutique Name | Kurtis, Suits & Dresses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--plum:#2E0F26;--plum2:#4A1A3C;--gold:#E8A93A;--paper:#FCF8F5;--ink:#241820;--mute:#7A6A73;--line:#E7DCD9}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:'Hanken Grotesk',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.1}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+header{background:var(--plum);color:#fff;position:sticky;top:0;z-index:20}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.brand{font-family:'Fraunces',serif;font-size:1.35rem;text-decoration:none}
+nav a{margin-left:22px;text-decoration:none;font-size:.95rem;opacity:.85}
+nav a:hover{opacity:1;color:var(--gold)}
+.hero{background:var(--plum);color:#fff;padding:56px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(2.4rem,5.2vw,4.2rem);margin-bottom:18px}
+.hero p{max-width:46ch;opacity:.85;margin-bottom:28px;font-size:1.05rem}
+.btn{display:inline-block;background:var(--gold);color:var(--plum);padding:13px 26px;border-radius:999px;font-weight:700;text-decoration:none;border:0;cursor:pointer;font:inherit;font-weight:700}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5);margin-left:10px}
+.collage{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;align-items:end}
+.collage img{width:100%;height:100%;object-fit:cover;border-radius:120px 120px 10px 10px;aspect-ratio:3/5}
+.collage img:nth-child(2){aspect-ratio:3/6;border-color:var(--gold)}
+section{padding:64px 0}
+.sec-head{margin-bottom:30px;max-width:60ch}
+.sec-head h2{font-size:clamp(1.8rem,3.5vw,2.6rem);margin-bottom:8px}
+.sec-head p{color:var(--mute)}
+.grid{columns:4 240px;column-gap:20px}
+.card{break-inside:avoid;margin-bottom:24px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pic{position:relative;display:block;width:100%;border:0;padding:0;background:#eee;cursor:zoom-in}
+.pic img{display:block;width:100%;height:auto}
+.pic .hint{position:absolute;right:10px;bottom:10px;background:rgba(46,15,38,.8);color:#fff;font-size:.75rem;padding:4px 10px;border-radius:999px}
+.thumbs{display:flex;gap:6px;padding:8px 12px 0}
+.thumbs img{width:40px;height:52px;object-fit:cover;border-radius:6px;cursor:pointer;border:2px solid transparent}
+.thumbs img.on{border-color:var(--gold)}
+.info{padding:14px 16px 18px}
+.info h3{font-size:1.15rem;margin-bottom:8px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:.9rem;margin-bottom:14px}
+dt{color:var(--mute)}
+dd.todo{color:#B4762A;font-style:italic}
+dd.price{font-weight:700}
+.order{display:block;text-align:center;background:#1FA855;color:#fff;text-decoration:none;padding:10px;border-radius:10px;font-weight:700;font-size:.95rem}
+.order:hover{background:#178a45}
+.contact{background:var(--plum2);color:#fff}
+.contact .boxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:24px}
+.box{border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:22px}
+.box small{opacity:.7;display:block;margin-bottom:4px}
+.box strong{font-size:1.3rem;font-family:'Fraunces',serif}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;counter-reset:s}
+.steps div{counter-increment:s;padding-left:46px;position:relative}
+.steps div::before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--plum);color:var(--gold);display:grid;place-items:center;font-weight:700}
+.steps b{display:block}
+footer{background:var(--plum);color:#fff;text-align:center;padding:26px 20px;font-size:.9rem;opacity:.95}
+/* viewer */
+#lb{position:fixed;inset:0;background:rgba(20,6,16,.95);z-index:50;display:none;flex-direction:column}
+#lb.open{display:flex}
+#stage{flex:1;overflow:hidden;display:grid;place-items:center;touch-action:none;cursor:grab}
+#stage img{max-width:92vw;max-height:78vh;transition:transform .15s;user-select:none;-webkit-user-drag:none}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;color:#fff;flex-wrap:wrap}
+.bar button{background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:999px;min-width:42px;height:42px;font-size:1.1rem;cursor:pointer;padding:0 14px}
+.bar button:hover{background:var(--gold);color:var(--plum)}
+.bar .grp{display:flex;gap:8px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.collage{max-width:420px}nav a:not(.keep){display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">Your Boutique Name</a>
+    <nav><a href="#collection">Collection</a><a href="#how">How to order</a><a class="keep" href="#contact">Contact</a></nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>Kurtis, suits and dresses for every occasion</h1>
+      <p>Embroidered kurtis, velvet sets, anarkalis, tunics and dresses. Tap any photo to zoom in and look at the fabric and detail up close.</p>
+      <a class="btn" href="#collection">See the collection</a><a class="btn ghost" href="#contact">Order now</a>
+    </div>
+    <div class="collage">
+      <img src="images/p08.jpg" alt="Pink anarkali suit">
+      <img src="images/p17.jpg" alt="Purple velvet suit">
+      <img src="images/p06.jpg" alt="Navy embroidered kurti">
+    </div>
+  </div>
+</div>
+
+<section id="collection">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>The collection</h2>
+      <p>Tap a photo to open the viewer: zoom, drag and swipe to see every detail.</p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head"><h2>How to order</h2></div>
+    <div class="steps">
+      <div><b>Pick a dress</b>Browse the collection and note the name.</div>
+      <div><b>Message us</b>Tap "Order on WhatsApp" under the dress. The message is filled in for you.</div>
+      <div><b>Confirm size and price</b>We reply with availability, size, and payment details.</div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head"><h2>Contact us to order</h2><p>Call or message us with the name of the dress you like.</p></div>
+    <div class="boxes">
+      <div class="box"><small>Mobile</small><strong id="phoneShow"></strong><br><br><a class="btn" id="callBtn" href="#">Call now</a></div>
+      <div class="box"><small>WhatsApp</small><strong id="waShow"></strong><br><br><a class="btn" id="waBtn" href="#" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>&copy; <span id="yr"></span> Your Boutique Name. All rights reserved.</footer>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="bar">
+    <span id="cap"></span>
+    <div class="grp">
+      <button id="prev" aria-label="Previous photo">&#8592;</button>
+      <button id="next" aria-label="Next photo">&#8594;</button>
+      <button id="zo" aria-label="Zoom out">&minus;</button>
+      <button id="zi" aria-label="Zoom in">+</button>
+      <button id="rs" aria-label="Reset zoom">Reset</button>
+      <button id="x" aria-label="Close">&times;</button>
+    </div>
+  </div>
+  <div id="stage"><img id="big" alt=""></div>
+</div>
+
+<script>
+/* ============ EDIT HERE ============ */
+const CONTACT = {
+  phone:    "+00 00000 00000",   // shown on the page (mobile number)
+  whatsapp: "00000000000"        // digits only, with country code, e.g. 919876543210
+};
+const TODO = "To be updated";   // shown until you fill in size / fabric / price
+/* Add more angles to any dress by adding files to its "images" list, e.g. ["images/p01.jpg","images/p01-back.jpg"] */
+const PRODUCTS = [
+  {name:"Teal kurti with gold print",         color:"Teal with gold",           images:["images/p01.jpg"], size:"", fabric:"", price:""},
+  {name:"Red kurti set with printed jacket",  color:"Red and blue floral",      images:["images/p02.jpg"], size:"", fabric:"", price:""},
+  {name:"Black tunic with floral embroidery", color:"Black with red and green", images:["images/p03.jpg"], size:"", fabric:"", price:""},
+  {name:"Black knit set with jacquard inner", color:"Black and tan",            images:["images/p04.jpg"], size:"", fabric:"", price:""},
+  {name:"Striped kaftan with ruffle edges",   color:"Black and white",          images:["images/p05.jpg"], size:"", fabric:"", price:""},
+  {name:"Navy kurti with white embroidery",   color:"Navy and white",           images:["images/p06.jpg"], size:"", fabric:"", price:""},
+  {name:"Yellow tunic with mirror work",      color:"Yellow",                   images:["images/p07.jpg"], size:"", fabric:"", price:""},
+  {name:"Pink anarkali suit with dupatta",    color:"Rani pink and gold",       images:["images/p08.jpg"], size:"", fabric:"", price:""},
+  {name:"Abstract print shirt",               color:"White multicolour",        images:["images/p09.jpg"], size:"", fabric:"", price:""},
+  {name:"Cream tunic with teal embroidery",   color:"Cream and teal",           images:["images/p10.jpg"], size:"", fabric:"", price:""},
+  {name:"Black floral print shirt",           color:"Black with pink and beige",images:["images/p11.jpg"], size:"", fabric:"", price:""},
+  {name:"Bandhani print kurti",               color:"Peach orange",             images:["images/p12.jpg"], size:"", fabric:"", price:""},
+  {name:"Floral tiered dress",                color:"White with green and blue",images:["images/p13.jpg"], size:"", fabric:"", price:""},
+  {name:"Wine kurta set with dupatta",        color:"Wine and lilac",           images:["images/p14.jpg"], size:"", fabric:"", price:""},
+  {name:"Belted floral dress",                color:"White and plum",           images:["images/p15.jpg"], size:"", fabric:"", price:""},
+  {name:"Crop top with printed skirt",        color:"Blue multicolour",         images:["images/p16.jpg"], size:"", fabric:"", price:""},
+  {name:"Purple velvet suit with gold lace",  color:"Purple and gold",          images:["images/p17.jpg"], size:"", fabric:"", price:""},
+  {name:"Red velvet set with stone work",     color:"Maroon red and gold",      images:["images/p18.jpg"], size:"", fabric:"", price:""},
+  {name:"Pink kurti with gold print",          color:"Pink with gold",           images:["images/p19.jpg"], size:"", fabric:"", price:""},
+  {name:"Gold striped shrug with black inner",color:"Black and gold",           images:["images/p20.jpg"], size:"", fabric:"", price:""},
+  {name:"Wine velvet sharara suit with dupatta",color:"Wine and gold",          images:["images/p21.jpg"], size:"", fabric:"", price:""},
+  {name:"Navy velvet suit with stone work",   color:"Navy and gold",            images:["images/p22.jpg"], size:"", fabric:"", price:""},
+  {name:"Brown kurti set with embroidered jacket",color:"Brown and cream",      images:["images/p23.jpg"], size:"", fabric:"", price:""},
+  {name:"Green velvet set with stone work",   color:"Bottle green and gold",    images:["images/p24.jpg"], size:"", fabric:"", price:""}
+];
+/* =================================== */
+
+const $ = id => document.getElementById(id);
+const waLink = msg => "https://wa.me/" + CONTACT.whatsapp + (msg ? "?text=" + encodeURIComponent(msg) : "");
+const row = (k, v, cls) => `<dt>${k}</dt><dd class="${v ? cls||"" : "todo"}">${v || TODO}</dd>`;
+
+$("grid").innerHTML = PRODUCTS.map((p, i) => `
+  <article class="card">
+    <button class="pic" data-i="${i}" data-j="0" aria-label="View ${p.name} larger">
+      <img src="${p.images[0]}" alt="${p.name}" loading="lazy" id="main${i}">
+      <span class="hint">Tap to zoom</span>
+    </button>
+    ${p.images.length > 1 ? `<div class="thumbs">${p.images.map((s, j) => `<img src="${s}" alt="Angle ${j+1}" data-i="${i}" data-t="${j}" class="${j?"":"on"}">`).join("")}</div>` : ""}
+    <div class="info">
+      <h3>${p.name}</h3>
+      <dl>${row("Color", p.color)}${row("Size", p.size)}${row("Fabric", p.fabric)}${row("Price", p.price, "price")}</dl>
+      <a class="order" target="_blank" rel="noopener" href="${waLink("Hi, I want to order: " + p.name + " (" + p.color + ")")}">Order on WhatsApp</a>
+    </div>
+  </article>`).join("");
+
+$("phoneShow").textContent = CONTACT.phone;
+$("waShow").textContent = "+" + CONTACT.whatsapp;
+$("callBtn").href = "tel:" + CONTACT.phone.replace(/[^+\d]/g, "");
+$("waBtn").href = waLink("Hi, I would like to order a dress.");
+$("yr").textContent = new Date().getFullYear();
+
+/* angle thumbnails switch the card's main photo */
+$("grid").addEventListener("click", e => {
+  const t = e.target.closest("[data-t]");
+  if (t) {
+    const i = t.dataset.i, j = +t.dataset.t;
+    $("main" + i).src = PRODUCTS[i].images[j];
+    t.parentNode.querySelectorAll("img").forEach(x => x.classList.toggle("on", x === t));
+    t.closest(".card").querySelector(".pic").dataset.j = j;
+    return;
+  }
+  const b = e.target.closest(".pic");
+  if (b) openViewer(+b.dataset.i, +b.dataset.j);
+});
+
+/* photo viewer: zoom, drag, swipe, keyboard */
+let cur = 0, ang = 0, z = 1, ox = 0, oy = 0, drag = null;
+const big = $("big");
+function apply(){ big.style.transform = `translate(${ox}px,${oy}px) scale(${z})`; }
+function show(){
+  const p = PRODUCTS[cur];
+  big.src = p.images[ang]; big.alt = p.name;
+  $("cap").textContent = p.name + (p.images.length > 1 ? ` (angle ${ang+1} of ${p.images.length})` : "");
+  z = 1; ox = oy = 0; apply();
+}
+function openViewer(i, j){ cur = i; ang = j || 0; $("lb").classList.add("open"); document.body.style.overflow = "hidden"; show(); $("x").focus(); }
+function closeViewer(){ $("lb").classList.remove("open"); document.body.style.overflow = ""; }
+function step(d){
+  const p = PRODUCTS[cur];
+  if (p.images.length > 1 && ang + d >= 0 && ang + d < p.images.length) ang += d;
+  else { cur = (cur + d + PRODUCTS.length) % PRODUCTS.length; ang = 0; }
+  show();
+}
+function zoom(f){ z = Math.min(5, Math.max(1, z * f)); if (z === 1) ox = oy = 0; apply(); }
+$("x").onclick = closeViewer; $("prev").onclick = () => step(-1); $("next").onclick = () => step(1);
+$("zi").onclick = () => zoom(1.4); $("zo").onclick = () => zoom(1/1.4); $("rs").onclick = () => { z = 1; ox = oy = 0; apply(); };
+$("stage").addEventListener("wheel", e => { e.preventDefault(); zoom(e.deltaY < 0 ? 1.15 : 1/1.15); }, {passive:false});
+$("stage").addEventListener("dblclick", () => { z = z > 1 ? 1 : 2.5; if (z === 1) ox = oy = 0; apply(); });
+$("stage").addEventListener("pointerdown", e => { drag = {x:e.clientX, y:e.clientY, ox, oy, sx:e.clientX}; $("stage").setPointerCapture(e.pointerId); });
+$("stage").addEventListener("pointermove", e => { if (drag && z > 1) { ox = drag.ox + e.clientX - drag.x; oy = drag.oy + e.clientY - drag.y; apply(); } });
+$("stage").addEventListener("pointerup", e => {
+  if (drag && z === 1 && Math.abs(e.clientX - drag.sx) > 60) step(e.clientX < drag.sx ? 1 : -1);
+  drag = null;
+});
+document.addEventListener("keydown", e => {
+  if (!$("lb").classList.contains("open")) return;
+  if (e.key === "Escape") closeViewer();
+  if (e.key === "ArrowRight") step(1);
+  if (e.key === "ArrowLeft") step(-1);
+  if (e.key === "+" || e.key === "=") zoom(1.4);
+  if (e.key === "-") zoom(1/1.4);
+});
+</script>
+</body>
+</html>
